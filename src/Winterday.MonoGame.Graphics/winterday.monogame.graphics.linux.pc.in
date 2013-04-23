@@ -1,0 +1,6 @@
+Name: Winterday.MonoGame.Graphics.Linux
+Description: Winterday.MonoGame.Graphics.Linux
+Version: 0.1
+
+Requires: 
+Libs: -r:@expanded_libdir@/@PACKAGE@/Winterday.MonoGame.Graphics.dll
