@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Winterday.MonoGame.Graphics;
 #endregion
 
 namespace Sandbox.Windows
@@ -16,13 +17,13 @@ namespace Sandbox.Windows
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        GraphicsDeviceManager _graphics;
+        KyuBatch _batch;
 
         public Game1()
             : base()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
@@ -34,8 +35,6 @@ namespace Sandbox.Windows
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
@@ -45,10 +44,7 @@ namespace Sandbox.Windows
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            _batch = new KyuBatch(GraphicsDevice);
         }
 
         /// <summary>
@@ -83,7 +79,12 @@ namespace Sandbox.Windows
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            var piOver4 = (float)Math.PI / 4;
+
+            _batch.Begin();
+            _batch.Draw(new Vector3(128, 128, 0), Vector3.Zero, new Vector2(64, 64), Vector2.One, Vector4.Zero, Color.White);
+            _batch.Draw(new Vector3(128, 256, 0), new Vector3(piOver4, piOver4, piOver4), new Vector2(64, 64), Vector2.One, Vector4.Zero, Color.White);
+            _batch.End();
 
             base.Draw(gameTime);
         }
