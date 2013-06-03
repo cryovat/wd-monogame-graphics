@@ -20,6 +20,7 @@
         Vector2 _size;
 
         VertexPositionColor[] _vertexData;
+        int _primitiveCount;
 
         public float this[int index]
         {
@@ -89,6 +90,7 @@
             _effect = new BasicEffect(device);
 
             _vertexData = new VertexPositionColor[pointCount * 2 + 1];
+            _primitiveCount = pointCount * 2 - 1;
 
             for (int i = 0; i < _vertexData.Length; i++)
             {
@@ -118,7 +120,7 @@
 
                     _device.DrawUserPrimitives(
                         PrimitiveType.TriangleStrip,
-                        _vertexData, 0, _vertexData.Length);
+                        _vertexData, 0, _primitiveCount);
                 }
             }
             _effect.End();
@@ -142,7 +144,7 @@
 
             for (int i = 0; i < _points.Length; i++)
             {
-                float ratio = i == 0 ? 0 : i == _points.Length ? 1 : (float)i / _points.Length;
+                float ratio = i == 0 ? 0 : i + 1 == _points.Length ? 1 : (float)i / _points.Length;
                 var offset = i * 2;
 
                 var x = width * ratio;
